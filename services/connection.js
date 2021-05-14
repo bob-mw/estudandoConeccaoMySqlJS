@@ -11,8 +11,20 @@ const config = {
 
 const conn = mysql.createConnection(config);
 
+const create = () => {
+    conn.query(`INSERT INTO cadastro (nome, idade) VALUES (?, ?);`, ["pernelongo", 132], (error, results, fields) => {
+        if (error) throw error;
+        console.log(`Linhas inseridas na tabela: ${results.affectedRows}`)
+        
+        conn.end((error) => {
+            if (error) throw error;
+            console.log("Bye");
+        });
+    });
+};
+
 const read = () => {
-    conn.query("select * from cadastro", (error, results, fields) => {
+    conn.query("SELECT * FROM cadastro", (error, results, fields) => {
         if (error) throw error;
 
         console.log(`Número de linhas encontrado: ${results.length}`);
@@ -26,7 +38,7 @@ const read = () => {
     });
 };
 
-conn.connect( (error) =>  { 
+conn.connect((error) =>  { 
     if (error) { 
         console.log("Foi encontrado algum problema:");
         throw error;
