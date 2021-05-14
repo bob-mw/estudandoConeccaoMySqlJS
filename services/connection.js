@@ -12,12 +12,17 @@ const config = {
 const conn = mysql.createConnection(config);
 
 const read = () => {
-    conn.query('select * from cadastro', (error, results, fields) => {
+    conn.query("select * from cadastro", (error, results, fields) => {
         if (error) throw error;
 
         console.log(`Número de linhas encontrado: ${results.length}`);
-        
+
         results.map((row) => console.log(row));
+
+        conn.end((error) => {
+            if (error) throw error;
+            console.log("Bye");
+        })
     });
 };
 
