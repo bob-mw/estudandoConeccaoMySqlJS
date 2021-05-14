@@ -11,13 +11,21 @@ const config = {
 
 const conn = mysql.createConnection(config);
 
-conn.connect( (err) =>  { 
-    if (err) { 
-        console.log("!!! Cannot connect !!! Error:");
-        throw err;
+const read = () => {
+    conn.query('select * from cadastro', (error, results, fields) => {
+        if (error) throw error;
+        console.log(`Número de linhas encontrado: ${results.length}`);
+    });
+};
+
+conn.connect( (error) =>  { 
+    if (error) { 
+        console.log("Foi encontrado algum problema:");
+        throw error;
     }
     else
     {
-       console.log("Connection established.");
+       console.log("Conecção feita com sucesso");
+       read();
     }
 });
