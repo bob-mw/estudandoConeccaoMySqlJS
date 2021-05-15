@@ -33,7 +33,7 @@ const read = () => {
 
         conn.end((error) => {
             if (error) throw error;
-            console.log("Bye");
+            console.log("Readed");
         })
     });
 };
@@ -45,8 +45,20 @@ const update = (id) => {
 
         conn.end((error) => {
             if (error) throw error;
-            console.log("Bye");
+            console.log("Upadated");
         })
+    });
+};
+
+const destroy = (id) => {
+    conn.query(`DELETE FROM cadastro WHERE id = ${id}`, (error, results, fields) => {
+        if (error) throw error;
+        console.log(`Forem deletados: ${results.affectedRows}`);
+
+        conn.end((error) => {
+            if (error) throw error;
+            console.log('Deleted');
+        });
     });
 };
 
