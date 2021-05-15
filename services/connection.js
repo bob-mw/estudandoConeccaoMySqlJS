@@ -38,6 +38,18 @@ const read = () => {
     });
 };
 
+const update = (id) => {
+    conn.query(`UPDATE cadastro  SET nome = ?, idade = ? WHERE id = ${id}`, ["mapinha", 41], (error, results, fields) => {
+        if (error) throw error;
+        console.log(`Foram atulalizadas: ${results.affectedRows}`)
+
+        conn.end((error) => {
+            if (error) throw error;
+            console.log("Bye");
+        })
+    });
+};
+
 conn.connect((error) =>  { 
     if (error) { 
         console.log("Foi encontrado algum problema:");
